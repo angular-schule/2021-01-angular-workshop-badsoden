@@ -11,9 +11,7 @@
         <span class="badge badge-secondary">{{ book.rating }}</span>
       </h2>
     </div>
-
-    <span *ngFor="let x of getStars()">⭐️</span>
-    
+    <br-stars [rating]="book.rating"></br-stars>
     <p>{{ book.description }}</p>
     <p>Preis: {{ book.price }}</p>
   </div>
