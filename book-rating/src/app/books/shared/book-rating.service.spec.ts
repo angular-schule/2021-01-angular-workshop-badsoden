@@ -42,7 +42,7 @@ describe('BookRatingService', () => {
   });
 
   it('should not rate higher than 5', () => {
-    book.rating = 4;
+    book.rating = 5;
     const ratedBook = service.rateUp(book);
     expect(ratedBook.rating).toBe(5);
   });
