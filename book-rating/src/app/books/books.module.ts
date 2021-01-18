@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { BookFormComponent } from './book-form/book-form.component';
 import { CreateBookContainerComponent } from './create-book-container/create-book-container.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CreateBookContainerComponent } from './create-book-container/create-boo
     DashboardComponent,
     BookDetailsComponent,
     BookFormComponent,
-    CreateBookContainerComponent
+    CreateBookContainerComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
