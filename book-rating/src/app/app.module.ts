@@ -4,8 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BooksModule } from './books/books.module';
-import { BookStoreService } from './books/shared/book-store.service';
 
 @NgModule({
   declarations: [
@@ -14,7 +12,6 @@ import { BookStoreService } from './books/shared/book-store.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BooksModule,
     HttpClientModule
   ],
   providers: [],
