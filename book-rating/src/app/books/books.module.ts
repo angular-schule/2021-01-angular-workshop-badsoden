@@ -22,8 +22,8 @@ import { SearchComponent } from './search/search.component';
     CommonModule,
     BooksRoutingModule
   ],
-  exports: [
-    DashboardComponent
-  ]
+  // exports: [
+  //   DashboardComponent
+  // ]
 })
 export class BooksModule { }
