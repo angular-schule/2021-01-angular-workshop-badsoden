@@ -22,6 +22,9 @@ export class AppComponent {
     }
 
     const myObs$ = new Observable(producer);
+    const myObs2$ = new Observable(obs => {
+      obs.next(1);
+    });
 
     const observer = {
       next: e => console.log('N', e),

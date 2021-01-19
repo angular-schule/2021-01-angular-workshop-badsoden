@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject, ReplaySubject } from 'rxjs';
-import { scan, reduce } from 'rxjs/operators';
+import { Subject, ReplaySubject, of } from 'rxjs';
+import { scan, reduce, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'rxw-game-score',
@@ -22,9 +22,43 @@ export class GameScoreComponent implements OnInit {
      */
 
     /******************************/
-
+    // Aktueller Punktestand
+    this.score$.pipe(
+      scan((acc, item) => acc + item, 0)
+    ).subscribe(score => this.currentScore = score);
     
+    // Finaler Punktestand
+    this.score$.pipe(
+      // tap(e => console.log('XXX', e)),
+      reduce((acc, item) => acc + item, 0)
+    ).subscribe(score => this.finalScore = score);
+
     /******************************/
+
+    of(
+      'SETNAMEFERDINAND',
+      'SETCITYLEIPZIG',
+      'SETNAMEFERDI',
+      'SETFRAMEWANGULAR',
+      'XXXXXXX',
+      'SETCITYBOCHUM'
+    ).pipe(
+      scan((acc, item) => {
+        switch (item) {
+          case 'SETNAMEFERDINAND': return { ...acc, name: 'Ferdinand' };
+          case 'SETNAMEFERDI': return { ...acc, name: 'Ferdi' };
+          case 'SETCITYLEIPZIG': return { ...acc, city: 'Leipzig' };
+          case 'SETCITYBOCHUM': return { ...acc, city: 'Bochum' };
+          case 'SETFRAMEWANGULAR': return { ...acc, framework: 'Angular' };
+          default: return acc;
+        }
+      }, { name: 'Frank', city: 'Dresden' })
+    ).subscribe(e => console.log(e));
+
+
+
+    /******************************/
+
 
     this.score$.subscribe({
       next: e => this.logStream$.next(e),

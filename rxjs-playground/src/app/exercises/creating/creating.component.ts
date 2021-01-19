@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of, from, timer, interval, ReplaySubject } from 'rxjs';
+import { Observable, of, from, timer, interval, ReplaySubject, throwError } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 @Component({
@@ -23,6 +23,14 @@ export class CreatingComponent implements OnInit {
 
     /******************************/
 
+    timer(0, 1000).pipe(
+      map(e => e * 3),
+      filter(e => e % 2 === 0)
+    ).subscribe({
+      next: e => this.log(e),
+      error: e => this.log('ERR ' + e),
+      complete: () => this.log('COMPLETE'),
+    });
     
     /******************************/
   }
