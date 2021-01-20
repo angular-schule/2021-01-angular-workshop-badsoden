@@ -1,4 +1,4 @@
-<ng-container *ngIf="books; else loading">
+<ng-container *ngIf="books$ | async as books">
     <br-book
     *ngFor="let b of books"
     (rateUp)="doRateUp($event)"
@@ -10,6 +10,4 @@
     </div>
 </ng-container>
 
-<ng-template #loading>
-    <div>LOADING...</div>
-</ng-template>
+<div *ngIf="loading$ | async">LOADING...</div>
