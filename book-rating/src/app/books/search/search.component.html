@@ -1,3 +1,7 @@
 <div class="form-group">
     <input class="form-control" [formControl]="searchControl">
 </div>
+
+<div *ngIf="loading">Wird geladen…</div>
+
+<br-book *ngFor="let b of results$ | async" [book]="b"></br-book>
