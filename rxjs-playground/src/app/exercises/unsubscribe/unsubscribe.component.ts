@@ -20,16 +20,14 @@ export class UnsubscribeComponent implements OnInit, OnDestroy {
    *
    * Es gibt noch weitere Lösungen, das Problem zu lösen...
    */
+
+  destroy$ = new Subject();
+
   ngOnInit() {
     const interval$ = timer(0, 1000);
 
     interval$.pipe(
-
-      /******************************/
-
-      
-      /******************************/
-
+      takeUntil(this.destroy$)
     ).subscribe({
       next: e => this.log(e),
       error: err => this.log('❌ ERROR: ' + err),
@@ -39,6 +37,8 @@ export class UnsubscribeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.logStream$.next('DESTROY');
+
+    this.destroy$.next();
   }
 
 
