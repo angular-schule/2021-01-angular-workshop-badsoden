@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Book } from '../shared/book';
 import { BookStoreService } from '../shared/book-store.service';
+import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'br-book-details',
@@ -20,11 +21,12 @@ export class BookDetailsComponent implements OnInit {
     console.log(isbn);
     */
 
-    // TODO: Verschachtelte Subscriptions
-    this.route.paramMap.subscribe(params => {
-      const isbn = params.get('isbn');
-      this.bs.getSingle(isbn).subscribe(book => this.book = book);
-    });
+   this.route.paramMap.pipe(
+     map(params => params.get('isbn')),
+     distinctUntilChanged(),
+     switchMap(isbn => this.bs.getSingle(isbn))
+   ).subscribe(book => this.book = book);
+
   }
 
 }
